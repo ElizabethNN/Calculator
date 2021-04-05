@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="UI\Calculator.xaml">
+    <Page Include="UI\calculator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -66,8 +66,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Calculator.xaml.cs">
-      <DependentUpon>Calculator.xaml</DependentUpon>
+    <Compile Include="UI\calculator.xaml.cs">
+      <DependentUpon>calculator.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
