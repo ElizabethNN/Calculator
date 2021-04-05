@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Calculator.BasicFunctions.Functions">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAEAAAAAABAAAAgAAAACAACAAAAAA=</HashCode>
+      <FileName>BasicFunctions\Functions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Calculator.Iteractor.Operand">
+    <Position X="10" Y="2" Width="1.5" />
+    <Members>
+      <Method Name="operator -" Hidden="true" />
+      <Method Name="operator !=" Hidden="true" />
+      <Method Name="operator *" Hidden="true" />
+      <Method Name="operator /" Hidden="true" />
+      <Method Name="operator +" Hidden="true" />
+      <Method Name="operator &lt;" Hidden="true" />
+      <Method Name="operator &lt;=" Hidden="true" />
+      <Method Name="operator ==" Hidden="true" />
+      <Method Name="operator &gt;" Hidden="true" />
+      <Method Name="operator &gt;=" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAMcAWAAgAAAAAAACAAAAAAAAAAByA=</HashCode>
+      <FileName>BasicFunctions\Operand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
