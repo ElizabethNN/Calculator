@@ -5,20 +5,16 @@ using Calculator.Saver;
 
 namespace Calculator.Memory
 {
-    class Memory : IMemory
+    class History : IMemory
     {
         private Timer _savetimer;
         private int _saveinterval;
         private ISaver _saver;
-        Dictionary<string, string> _memorycells;
+        Dictionary<string, string> _memorycells = new Dictionary<string, string> {};
         public string this[string key]
         {
             get => _memorycells[key];
             set {
-                if (!decimal.TryParse(value, out _))
-                {
-                    throw new System.Exception("Wrong data was given");
-                }
                 if (_memorycells.ContainsKey(key))
                 {
                     _memorycells[key] = value;
@@ -47,7 +43,7 @@ namespace Calculator.Memory
             }
         }
 
-        public Memory(string path)
+        public History(string path)
         {
             _savetimer = new Timer(300000)
             {
@@ -75,14 +71,9 @@ namespace Calculator.Memory
                 _memorycells = _saver.loadData();
             }
             catch {
-                _memorycells = new Dictionary<string, string> {
-                                                                 { "pi", Math.PI.ToString("F16") },
-                                                                 { "e", Math.E.ToString("F16") },
-                                                                 { "sqr2", Math.Sqrt(2).ToString("F16") }
-                                                                                                          };
+                _memorycells = new Dictionary<string, string>();
             }
         }
-
         public void save()
         {
             _saver.saveData(_memorycells);

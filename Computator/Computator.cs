@@ -6,13 +6,16 @@ namespace Calculator.Computator
     
     class Computator : IComputator
     {
-        static public readonly string[] prefix_functions = { "neg", "sin", "cos", "tg", "ctg" };
+        static Computator _self;
+        static public readonly string[] prefix_functions = { "neg", "sin", "cos", "tg", "ctg", "sqrt", "log", "lg", "ln", "abs", "asin", "acos", "atg", "actg" };
         static public readonly string[] postfix_functions = { "!" };
         static public readonly string[] high_priority_functions = { "^" };
         static public readonly string[] medium_priority_functions = { "*", "/" };
         static public readonly string[] low_priority_functions = { "+", "-" };
 
-        static string computate(string[] postfix_expression)
+        private Computator() { }
+
+        string computate(string[] postfix_expression)
         {
             var numbers = new Stack<string>();
             foreach (string i in postfix_expression)
@@ -23,20 +26,45 @@ namespace Calculator.Computator
                 }
                 else if (Functions.unary_functions.ContainsKey(i))
                 {
-                    decimal.TryParse(numbers.Pop(), out decimal x);
+                    decimal x;
+                    try
+                    {
+                        decimal.TryParse(numbers.Pop(), out x);
+                    }
+                    catch (System.Exception e)
+                    {
+                        throw new System.Exception("Not enough parameters", e);
+                    }
                     numbers.Push(Functions.unary_functions[i](x).ToString());
                 }
                 else if (Functions.binary_functions.ContainsKey(i))
                 {
-                    decimal.TryParse(numbers.Pop(), out decimal x);
-                    decimal.TryParse(numbers.Pop(), out decimal y);
+                    decimal x, y;
+                    try
+                    {
+                        decimal.TryParse(numbers.Pop(), out y);
+                        decimal.TryParse(numbers.Pop(), out x);
+                    }
+                    catch (System.Exception e)
+                    {
+                        throw new System.Exception("Not enough parameters", e);
+                    }
                     numbers.Push(Functions.binary_functions[i](x, y).ToString());
                 }
             }
             return numbers.Pop();
         }
 
-        static string[] convertToPostfixExpression(string[] infix_expression)
+        public static Computator getComputator()
+        {
+            if (_self == null)
+            {
+                _self = new Computator();
+            }
+            return _self;
+        }
+
+        string[] convertToPostfixExpression(string[] infix_expression)
         {
             var stack = new Stack<string>();
             var result = new List<string>();
@@ -57,14 +85,14 @@ namespace Calculator.Computator
                 {
                     result.Add(i);
                 }
-                else if (prefix_functions.Contains(i))
+                else if (prefix_functions.Contains(i) || i == "(")
                 {
                     stack.Push(i);
                 }
                 else if (i == ")")
                 {
                     string x;
-                    while ((x = stack.Pop()) != "(")
+                    while (stack.Count > 0 && (x = stack.Pop()) != "(")
                     {
                         result.Add(x);
                     }
@@ -95,6 +123,10 @@ namespace Calculator.Computator
                         stack.Pop();
                     }
                     stack.Push(i);
+                }
+                else
+                {
+                    throw new System.Exception("Unrecognized symbol " + i + " at position " + infix_expression.ToList().IndexOf(i));
                 }
             }
             while (stack.Count > 0)

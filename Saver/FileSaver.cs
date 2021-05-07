@@ -5,6 +5,12 @@ namespace Calculator.Saver
 {
     class FileSaver : ISaver
     {
+        string path;
+        public FileSaver(string path)
+        {
+            this.path = path;
+        }
+
         public void saveData(Dictionary<string, string> data)
         {
             var lines = new List<string>();
@@ -12,13 +18,13 @@ namespace Calculator.Saver
             {
                 lines.Add(i.Key + " " + i.Value);
             }
-            File.WriteAllLines("data", lines.ToArray());
+            File.WriteAllLines(path, lines.ToArray());
         }
 
         public Dictionary<string, string> loadData()
         {
             var result = new Dictionary<string, string>();
-            string[] lines = File.ReadAllLines("data");
+            string[] lines = File.ReadAllLines(path);
             foreach (string i in lines)
             {
                 string[] temp = i.Split(' ');
