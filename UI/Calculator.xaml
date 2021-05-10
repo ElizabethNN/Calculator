@@ -5,14 +5,30 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:Calculator"
     mc:Ignorable="d"
-    Title="Calculator" Height="800" Width="800">
+    Title="Calculator" Height="800" Width="800" Background="#FF1F1F1F" BorderBrush="#FF151515">
+    <Window.Resources>
+        <Style x:Key="Knopka">
+            <Setter Property="Button.FontFamily" Value="Verdana" />
+            <Setter Property="Button.Background" Value="#FF060606" />
+            <Setter Property="Button.Foreground" Value="White" />
+            <Setter Property="Button.FontSize" Value="30" />
+            <Setter Property="Button.Margin" Value="2" />
+            <Setter Property="Button.BorderThickness" Value="0" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Button.Background" Value="#FF1F1F1F" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="237*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width ="118*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="LayoutRoot" Background="White">
+        <Grid x:Name="LayoutRoot" Background="#FF1F1F1F">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -26,31 +42,43 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="textBox" Grid.Column="0" Grid.ColumnSpan="4" TextAlignment="Right" TextChanged="onTextChanged" KeyDown="onEnter"/>
-            <Button Grid.Column="0" Grid.Row="1" Click="symbolClick" Focusable="False">1</Button>
-            <Button Grid.Column="1" Grid.Row="1" Click="symbolClick" Focusable="False">2</Button>
-            <Button Grid.Column="2" Grid.Row="1" Click="symbolClick" Focusable="False">3</Button>
-            <Button Grid.Column="0" Grid.Row="2" Click="symbolClick" Focusable="False">4</Button>
-            <Button Grid.Column="1" Grid.Row="2" Click="symbolClick" Focusable="False">5</Button>
-            <Button Grid.Column="2" Grid.Row="2" Click="symbolClick" Focusable="False">6</Button>
-            <Button Grid.Column="0" Grid.Row="3" Click="symbolClick" Focusable="False">7</Button>
-            <Button Grid.Column="1" Grid.Row="3" Click="symbolClick" Focusable="False">8</Button>
-            <Button Grid.Column="2" Grid.Row="3" Click="symbolClick" Focusable="False">9</Button>
-            <Button Grid.Column="1" Grid.Row="4" Click="symbolClick" Focusable="False">0</Button>
-            <Button Grid.Column="4" Grid.Row="1" Click="symbolClick" Focusable="False">+</Button>
-            <Button Grid.Column="4" Grid.Row="2" Click="symbolClick" Focusable="False">-</Button>
-            <Button Grid.Column="4" Grid.Row="3" Click="symbolClick" Focusable="False">*</Button>
-            <Button Grid.Column="4" Grid.Row="4" Click="symbolClick" Focusable="False">/</Button>
-            <Button Grid.Column="2" Grid.Row="4" Click="onEqual" Focusable="False">enter</Button>
-            <Button Grid.Column="0" Grid.Row="5" Click="deleteLast" Focusable="False">←</Button>
+            <TextBox x:Name="textBox" Grid.Column="0" Grid.ColumnSpan="4" TextAlignment="Left" TextChanged="onTextChanged" KeyDown="onEnter" Foreground="White"  FontSize="48" TextWrapping="Wrap" IsUndoEnabled="True" Background="#FF1F1F1F" SelectionBrush="White" BorderBrush="#FF1F1F1F"/>
+            <Button Grid.Column="0" Grid.Row="1" Click="symbolClick" Focusable="False" Style="{StaticResource Knopka}">1</Button>
+            <Button Grid.Column="1" Grid.Row="1" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">2</Button>
+            <Button Grid.Column="2" Grid.Row="1" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">3</Button>
+            <Button Grid.Column="0" Grid.Row="2" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">4</Button>
+            <Button Grid.Column="1" Grid.Row="2" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">5</Button>
+            <Button Grid.Column="2" Grid.Row="2" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">6</Button>
+            <Button Grid.Column="0" Grid.Row="3" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">7</Button>
+            <Button Grid.Column="1" Grid.Row="3" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">8</Button>
+            <Button Grid.Column="2" Grid.Row="3" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">9</Button>
+            <Button Grid.Column="1" Grid.Row="4" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">0</Button>
+            <Button Grid.Column="4" Grid.Row="1" Click="symbolClick" Focusable="False"   Style="{StaticResource Knopka}">+</Button>
+            <Button Grid.Column="4" Grid.Row="2" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">-</Button>
+            <Button Grid.Column="4" Grid.Row="3" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">*</Button>
+            <Button Grid.Column="4" Grid.Row="4" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">/</Button>
+            <Button Grid.Column="2" Grid.Row="4" Click="onEqual" Focusable="False" Style="{StaticResource Knopka}">Enter</Button>
+            <Button Grid.Column="0" Grid.Row="5" Click="deleteLast" Focusable="False" Style="{StaticResource Knopka}">←</Button>
         </Grid>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="4" ShowsPreview="True" Background="#FF393E46"/>
-        <TabControl Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" SelectedIndex="3" VerticalContentAlignment="Center" BorderThickness="0">
-            <TabItem Header="History" IsSelected="True" Margin="-2,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <ListView Name="HistoryList">
-                </ListView>
+        <TabControl Grid.Column="2" HorizontalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" SelectedIndex="3" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF1F1F1F">
+            <TabItem Header="History" IsSelected="True" Margin="-2,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="#FFEC2A2A" Background="#FFFF2424">
+                <StackPanel Name="HistoryList">
+                    <Button x:Name="button" >
+                        <WrapPanel Orientation="Vertical" Width="250" HorizontalAlignment="Left">
+                            <TextBlock Width="159" HorizontalAlignment="Left" FontSize="20">55+6</TextBlock>
+                            <TextBlock Text="answer: " Foreground="White" FontSize="22"></TextBlock>
+                        </WrapPanel>
+                    </Button>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Memory" IsSelected="False" HorizontalAlignment="Left" Margin="0,-2,0,0">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="#FF8259CB" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
                 <ListView Name="MemoryList">
                 </ListView>
             </TabItem>
