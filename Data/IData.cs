@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Calculator.Memory
+namespace Calculator.Data
 {
-    interface IMemory
+    interface IData
     {
         string this[string key] { get; set; }
         int autosaveinterval { get; set; }
-        Dictionary<string, string> getMemoryDump();
+        Dictionary<string, string> getDataDump();
         void save();
         void loadFromDisk();
     }

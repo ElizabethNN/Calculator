@@ -56,7 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Memory\History.cs" />
+    <Compile Include="Computator\Unifier.cs" />
+    <Compile Include="Data\History.cs" />
+    <Compile Include="UI\HistoryItemUI.cs" />
+    <Compile Include="UI\MemoryItemUI.cs" />
     <Compile Include="UI\Presentator.cs" />
     <Page Include="UI\calculator.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -65,10 +68,10 @@
     <Compile Include="Computator\Computator.cs" />
     <Compile Include="Computator\Functions.cs" />
     <Compile Include="Computator\IComputator.cs" />
-    <Compile Include="Memory\IMemory.cs" />
-    <Compile Include="Memory\Memory.cs" />
-    <Compile Include="Saver\FileSaver.cs" />
-    <Compile Include="Saver\ISaver.cs" />
+    <Compile Include="Data\IData.cs" />
+    <Compile Include="Data\Memory.cs" />
+    <Compile Include="Data\Saver\FileSaver.cs" />
+    <Compile Include="Data\Saver\ISaver.cs" />
     <Compile Include="UI\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

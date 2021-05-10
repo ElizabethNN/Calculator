@@ -83,11 +83,11 @@ namespace Calculator.Computator
                 }
                 else if (postfix_functions.Contains(i))
                 {
-                    result.Add(i);
+                    result.Add(i.ToLower());
                 }
                 else if (prefix_functions.Contains(i) || i == "(")
                 {
-                    stack.Push(i);
+                    stack.Push(i.ToLower());
                 }
                 else if (i == ")")
                 {
@@ -104,7 +104,7 @@ namespace Calculator.Computator
                         result.Add(stack.Peek());
                         stack.Pop();
                     }
-                    stack.Push(i);
+                    stack.Push(i.ToLower());
                 }
                 else if (medium_priority_functions.Contains(i))
                 {
@@ -113,7 +113,7 @@ namespace Calculator.Computator
                         result.Add(stack.Peek());
                         stack.Pop();
                     }
-                    stack.Push(i);
+                    stack.Push(i.ToLower());
                 }
                 else if (low_priority_functions.Contains(i))
                 {
@@ -122,7 +122,7 @@ namespace Calculator.Computator
                         result.Add(stack.Peek());
                         stack.Pop();
                     }
-                    stack.Push(i);
+                    stack.Push(i.ToLower());
                 }
                 else
                 {
