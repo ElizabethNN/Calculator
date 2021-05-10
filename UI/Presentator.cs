@@ -1,123 +1,96 @@
-﻿using Calculator.Memory;
-using Calculator.Computator;
-using System.Text.RegularExpressions;
+﻿using System.Windows.Controls;
+using System.Windows;
 using System.Collections.Generic;
+using Calculator.Computator;
 using System.Linq;
-using System;
 
 namespace Calculator.UI
 {
     class Presentator
     {
-        static readonly IComputator _computator = Computator.Computator.getComputator();
-        static readonly IMemory _memory = new Memory.Memory("data");
-        static readonly IMemory _history = new History("history");
-        public static Dictionary<string, string> memorydump { private set; get; } = _memory.getMemoryDump();
-        public static Dictionary<string, string> historydump { private set; get; } = _memory.getMemoryDump();
-
-        public static string cleanExpression(string expression)
+        static readonly char[] _allowedsymbols = {
+            'a',
+            'b',
+            'c',
+            'd',
+            'e',
+            'f',
+            'g',
+            'h',
+            'i',
+            'j',
+            'k',
+            'l',
+            'm',
+            'n',
+            'o',
+            'p',
+            'q',
+            'r',
+            's',
+            't',
+            'u',
+            'v',
+            'w',
+            'x',
+            'y',
+            'z',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            '0',
+            '(',
+            ')',
+            '+',
+            '-',
+            '*',
+            '/',
+            '!',
+            '$',
+            '=',
+            '^',
+            ','
+        };
+        public static UIElementCollection updateMemory(FrameworkElement element, RoutedEventHandler handler)
         {
-            return Regex.Replace(expression, @"\s", "");
-        }
-
-        public static Dictionary<string, string> getMemoryDump() {
-            return _memory.getMemoryDump();
-        }
-
-        public static string[] convertToComputatorFormat(string expression)
-        {
-            var infix = Regex.Split(expression, @"([=!*()\^\/]|(?<!E)[\+\-])").ToList();
-            for (int i = infix.Count - 1; i >=0; i--)
+            var iElementCollection = new UIElementCollection(element, element);
+            foreach (KeyValuePair<string, string> i in Unifier.memory_dump)
             {
-                if (infix[i] == "")
+                iElementCollection.Add(new MemoryItemUI(i.Key, i.Value, handler));
+            }
+            return iElementCollection;
+        }
+        public static UIElementCollection updateHistory(FrameworkElement element, RoutedEventHandler handler)
+        {
+            var iElementCollection = new UIElementCollection(element, element);
+            foreach (KeyValuePair<string, string> i in Unifier.history_dump)
+            {
+                iElementCollection.Add(new MemoryItemUI(i.Key, i.Value, handler));
+            }
+            return iElementCollection;
+        }
+        public static string cleanInput(string input)
+        {
+            string str = "";
+            string lowercase = input.ToLower();
+            for (int i = 0; i < lowercase.Length; i++)
+            {
+                if (_allowedsymbols.Contains(lowercase[i]))
                 {
-                    infix.RemoveAt(i);
+                    str += input[i];
                 }
             }
-            return infix.ToArray();
+            return str;
         }
-
-        public static string getFromHistory(string name)
+        public static string[] parseAssignment(string text)
         {
-            try
-            {
-                return _history[name];
-            }
-            catch
-            {
-                return "0";
-            }
-        }
-
-        public static string getFromMemory(string name)
-        {
-            try
-            {
-                return _memory[name.Trim('$')];
-            }
-            catch {
-                return "0";
-            }
-        }
-
-        public static string[] getFromMemory(string[] expression)
-        {
-            var res = new List<string>();
-            for (int i = 0; i < expression.Length; i++)
-            {
-                if (expression[i][0] == '$' && expression[i][expression[i].Length - 1] == '$')
-                {
-                    try
-                    {
-                        res.Add(_memory[expression[i].Trim('$')]);
-                    }
-                    catch {
-                        res.Add("0");
-                    }
-                }
-                else
-                {
-                    res.Add(expression[i]);
-                }
-            }
-            return res.ToArray();
-        }
-
-        public static string calculate(string expression)
-        {
-            string[] input = convertToComputatorFormat(cleanExpression(expression));
-            input = getFromMemory(input);
-            _history[expression] = _computator.calculateExpression(input);
-             historydump = _history.getMemoryDump();
-            return _history[expression];
-        }
-
-        public static void loadFromDisk()
-        {
-            _history.loadFromDisk();
-            _memory.loadFromDisk();
-            historydump = _history.getMemoryDump();
-            memorydump = _memory.getMemoryDump();
-        }
-
-        public static string calculateWithAssignment(string expression, string name)
-        {
-            string[] input = convertToComputatorFormat(cleanExpression(expression));
-            input = getFromMemory(input);
-            _history[expression] = "";
-            _memory[name.Trim('$')] = _computator.calculateExpression(input);
-            memorydump = _memory.getMemoryDump();
-            _history[expression] = _memory[name.Trim('$')];
-            historydump = _history.getMemoryDump();
-            if (name != "answer")
-                _memory["answer"] = _memory[name.Trim('$')];
-            return _memory[name.Trim('$')];
-        }
-
-        public static void save()
-        {
-            _history.save();
-            _memory.save();
+            return text.Split('=');
         }
     }
 }
