@@ -5,16 +5,17 @@ namespace Calculator.UI
 {
     class MemoryItemUI : Button
     {
-        string name;
-        string value;
-        public MemoryItemUI(string name, string value, RoutedEventHandler handler)
+        public string name { get; private set; }
+        public string value  { get; private set; }
+        public MemoryItemUI(string name, string value, RoutedEventHandler handler, Style style)
         {
             Click += handler;
             this.name = name;
             this.value = value;
-            Content = new WrapPanel();
-            ((WrapPanel)Content).Children.Add(new TextBlock { Text = name });
-            ((WrapPanel)Content).Children.Add(new TextBlock { Text = value });
+            //Style = 
+            Content = new WrapPanel() { Style = style };
+            ((WrapPanel)Content).Children.Add(new TextBlock { Text = name, Style = style });
+            ((WrapPanel)Content).Children.Add(new TextBlock { Text = value, Style = style });
         }
     }
 }

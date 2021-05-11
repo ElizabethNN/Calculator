@@ -126,7 +126,7 @@ namespace Calculator.Computator
                 history_dump = _history.getDataDump();
             }
             _memory["answer"] = _history[expression];
-            if (decimal.TryParse(_history[expression], out _))
+            if (double.TryParse(_history[expression], out _))
             {
                 _memory[name] = _history[expression];
             }

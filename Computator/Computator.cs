@@ -20,16 +20,16 @@ namespace Calculator.Computator
             var numbers = new Stack<string>();
             foreach (string i in postfix_expression)
             {
-                if (decimal.TryParse(i, out _))
+                if (double.TryParse(i, out _))
                 {
                     numbers.Push(i);
                 }
                 else if (Functions.unary_functions.ContainsKey(i))
                 {
-                    decimal x;
+                    double x;
                     try
                     {
-                        decimal.TryParse(numbers.Pop(), out x);
+                        double.TryParse(numbers.Pop(), out x);
                     }
                     catch (System.Exception e)
                     {
@@ -39,11 +39,11 @@ namespace Calculator.Computator
                 }
                 else if (Functions.binary_functions.ContainsKey(i))
                 {
-                    decimal x, y;
+                    double x, y;
                     try
                     {
-                        decimal.TryParse(numbers.Pop(), out y);
-                        decimal.TryParse(numbers.Pop(), out x);
+                        double.TryParse(numbers.Pop(), out y);
+                        double.TryParse(numbers.Pop(), out x);
                     }
                     catch (System.Exception e)
                     {
@@ -70,14 +70,14 @@ namespace Calculator.Computator
             var result = new List<string>();
             for (int i = 0; i < infix_expression.Length; i++)
             {
-                if (infix_expression[i] == "-" && (i == 0 || !decimal.TryParse(infix_expression[i - 1], out _)))
+                if (infix_expression[i] == "-" && (i == 0 || !double.TryParse(infix_expression[i - 1], out _)))
                 {
                     infix_expression[i] = "neg";
                 }
             }
             foreach (string i in infix_expression)
             {
-                if (decimal.TryParse(i, out _))
+                if (double.TryParse(i, out _))
                 {
                     result.Add(i);
                 }

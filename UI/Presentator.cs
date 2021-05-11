@@ -57,23 +57,23 @@ namespace Calculator.UI
             '^',
             ','
         };
-        public static UIElementCollection updateMemory(FrameworkElement element, RoutedEventHandler handler)
+        public static List<MemoryItemUI> updateMemory(RoutedEventHandler handler, Style style)
         {
-            var iElementCollection = new UIElementCollection(element, element);
+            var Elements = new List<MemoryItemUI>();
             foreach (KeyValuePair<string, string> i in Unifier.memory_dump)
             {
-                iElementCollection.Add(new MemoryItemUI(i.Key, i.Value, handler));
+                Elements.Add(new MemoryItemUI(i.Key, i.Value, handler, style));
             }
-            return iElementCollection;
+            return Elements;
         }
-        public static UIElementCollection updateHistory(FrameworkElement element, RoutedEventHandler handler)
+        public static List<HistoryItemUI> updateHistory(RoutedEventHandler handler, Style style)
         {
-            var iElementCollection = new UIElementCollection(element, element);
+            var Elements = new List<HistoryItemUI>();
             foreach (KeyValuePair<string, string> i in Unifier.history_dump)
             {
-                iElementCollection.Add(new MemoryItemUI(i.Key, i.Value, handler));
+                Elements.Add(new HistoryItemUI(i.Key, i.Value, handler, style));
             }
-            return iElementCollection;
+            return Elements;
         }
         public static string cleanInput(string input)
         {

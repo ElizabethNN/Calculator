@@ -15,7 +15,7 @@ namespace Calculator.Data
         {
             get => _memorycells[key];
             set {
-                if (!decimal.TryParse(value, out _))
+                if (!double.TryParse(value, out _))
                 {
                     throw new System.Exception("Wrong data was given");
                 }

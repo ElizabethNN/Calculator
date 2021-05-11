@@ -5,8 +5,8 @@ namespace Calculator.Computator
 {
     class Functions
     {
-        public delegate decimal unaryDelegate(decimal x);
-        public delegate decimal binaryDelegate(decimal x, decimal y);
+        public delegate double unaryDelegate(double x);
+        public delegate double binaryDelegate(double x, double y);
 
         public static readonly Dictionary<string, unaryDelegate> unary_functions = new Dictionary<string, unaryDelegate>{ 
                                                                                                                           {"neg", negative}, 
@@ -33,95 +33,95 @@ namespace Calculator.Computator
                                                                                                                           { "-", minus}
                                                                                                                                                    };
 
-        static decimal negative(decimal number)
+        static double negative(double number)
         {
             return -1 * number;
         }
         
-        static decimal sinus(decimal number)
+        static double sinus(double number)
         {
-            return (decimal)Math.Sin((double)number);
+            return (double)Math.Sin((double)number);
         }
 
-        static decimal cosine(decimal number)
+        static double cosine(double number)
         {
-            return (decimal)Math.Cos((double)number);
+            return (double)Math.Cos((double)number);
         }
-        static decimal tangent(decimal number)
+        static double tangent(double number)
         {
-            return (decimal)Math.Tan((double)number);
+            return (double)Math.Tan((double)number);
         }
-        static decimal cotangent(decimal number)
+        static double cotangent(double number)
         {
-            return (decimal)(1/Math.Tan((double)number));
+            return (double)(1/Math.Tan((double)number));
         }
-        static decimal power(decimal x, decimal y)
+        static double power(double x, double y)
         {
-            return (decimal)Math.Pow((double)x, (double)y);
+            return (double)Math.Pow((double)x, (double)y);
         }
-        static decimal multiplication(decimal x, decimal y)
+        static double multiplication(double x, double y)
         {
             return x * y;
         }
-        static decimal divide(decimal x, decimal y)
+        static double divide(double x, double y)
         {
             return x / y;
         }
-        static decimal plus(decimal x, decimal y)
+        static double plus(double x, double y)
         {
             return x + y;
         }
-        static decimal minus(decimal x, decimal y)
+        static double minus(double x, double y)
         {
             return x - y;
         }
-        static decimal factorial(decimal x)
+        static double factorial(double x)
         {
             x = Math.Truncate(x);
-            decimal y = 1;
-            for (decimal i = 1; i <= x; i++)
+            double y = 1;
+            for (double i = 1; i <= x; i++)
             {
                 y *= i;
             }
             return y;
         }
-        static decimal squareRoot(decimal x)
+        static double squareRoot(double x)
         {
-            return (decimal)Math.Sqrt((double)x);
+            return (double)Math.Sqrt((double)x);
         }
-        static decimal logarithm2(decimal number)
+        static double logarithm2(double number)
         {
-            return (decimal)Math.Log((double)number, 2);
+            return (double)Math.Log((double)number, 2);
         }
-        static decimal logarithmE(decimal number)
+        static double logarithmE(double number)
         {
-            return (decimal)Math.Log((double)number);
+            return (double)Math.Log((double)number);
         }
-        static decimal logarithm10(decimal number)
+        static double logarithm10(double number)
         {
-            return (decimal)Math.Log10((double)number);
+            return (double)Math.Log10((double)number);
         }
-        static decimal absolute(decimal number)
+        static double absolute(double number)
         {
-            return (decimal)Math.Abs((double)number);
-        }
-
-        static decimal arksinus(decimal number)
-        {
-            return (decimal)Math.Asin((double)number);
+            return (double)Math.Abs((double)number);
         }
 
-        static decimal arkcosine(decimal number)
+        static double arksinus(double number)
         {
-            return (decimal)Math.Acos((double)number);
+            return (double)Math.Asin((double)number);
         }
-        static decimal arktangent(decimal number)
+
+        static double arkcosine(double number)
         {
-            return (decimal)Math.Atan((double)number);
+            return (double)Math.Acos((double)number);
         }
-        static decimal arkcotangent(decimal number)
+        static double arktangent(double number)
         {
-            return (decimal)Math.Atan((double)(1/number));
+            return (double)Math.Atan((double)number);
+        }
+        static double arkcotangent(double number)
+        {
+            return (double)Math.Atan((double)(1/number));
         }
     }
 }

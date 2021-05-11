@@ -14,11 +14,21 @@ namespace Calculator
 {
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
             textBox.Focus();
             Unifier.loadAll();
+            MemoryList.Children.Clear();
+            foreach (object i in Presentator.updateMemory(OnMemoryClick, FindResource("SidePanel") as Style))
+            {
+                MemoryList.Children.Add((UIElement)i);
+            }
+            foreach (object i in Presentator.updateHistory(OnHistoryClick, FindResource("SidePanel") as Style))
+            {
+                HistoryList.Children.Add((UIElement)i);
+            }
             Closed += OnWindowClose;
         }
         private void onTextChanged(object sender, TextChangedEventArgs e)
@@ -55,7 +65,16 @@ namespace Calculator
             {
                 result = Unifier.calculate(assignment[1], assignment[0]);
             }
-            //TODO update Lists
+            MemoryList.Children.Clear();
+            foreach (object i in Presentator.updateMemory(OnMemoryClick, FindResource("SidePanel") as Style))
+            {
+                MemoryList.Children.Add((UIElement)i);
+            }
+            HistoryList.Children.Clear();
+            foreach (object i in Presentator.updateHistory(OnHistoryClick, FindResource("SidePanel") as Style))
+            {
+                HistoryList.Children.Add((UIElement)i);
+            }
             textBox.Text = result;
             textBox.CaretIndex = textBox.Text.Length;
         }
@@ -70,6 +89,16 @@ namespace Calculator
         private void OnWindowClose(object sender, EventArgs e)
         {
             Unifier.saveAll();
+        }
+        private void OnMemoryClick(object sender, EventArgs e)
+        {
+            var element = (MemoryItemUI)sender;
+            textBox.Text += "$" + element.name + "$";
+        }
+        private void OnHistoryClick(object sender, EventArgs e)
+        {
+            var element = (HistoryItemUI)sender;
+            textBox.Text = element.expression;
         }
     }
 }

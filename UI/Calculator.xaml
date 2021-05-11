@@ -15,12 +15,22 @@
             <Setter Property="Button.Margin" Value="2" />
             <Setter Property="Button.BorderThickness" Value="0" />
             <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="SidePanel">
+            <Setter Property="Button.Focusable" Value="False"/>
+            <Setter Property="Button.HorizontalAlignment" Value="Left" />
+            <Setter Property="WrapPanel.HorizontalAlignment" Value="Left"/>
+            <Setter Property="WrapPanel.Orientation" Value="Vertical"/>
+            <Setter Property="TextBlock.Width" Value="{Binding ActualWidth, ElementName=HistoryList, Mode=OneWay}"/>
+        </Style>
+        <Style BasedOn="{StaticResource SidePanel}" x:Key="SidePanelButtons" TargetType="Button">
+            <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Button.Background" Value="#FF1F1F1F" />
+                    <Setter Property="Background" Value="#FF1F1F1F"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
-
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -64,12 +74,12 @@
         <TabControl Grid.Column="2" HorizontalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" SelectedIndex="3" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF1F1F1F">
             <TabItem Header="History" IsSelected="True" Margin="-2,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="#FFEC2A2A" Background="#FFFF2424">
                 <StackPanel Name="HistoryList">
-                    <Button x:Name="button" >
+                    <!--<Button x:Name="button" >
                         <WrapPanel Orientation="Vertical" Width="250" HorizontalAlignment="Left">
-                            <TextBlock Width="159" HorizontalAlignment="Left" FontSize="20">55+6</TextBlock>
+                            <TextBlock Width="{Binding ActualWidth, ElementName=HistoryList, Mode=OneWay}" HorizontalAlignment="Left" FontSize="20">55+6</TextBlock>
                             <TextBlock Text="answer: " Foreground="White" FontSize="22"></TextBlock>
                         </WrapPanel>
-                    </Button>
+                    </Button>-->
                 </StackPanel>
             </TabItem>
             <TabItem Header="Memory" IsSelected="False" HorizontalAlignment="Left" Margin="0,-2,0,0">
@@ -79,8 +89,8 @@
                         <GradientStop Color="#FF8259CB" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-                <ListView Name="MemoryList">
-                </ListView>
+                <StackPanel Name="MemoryList">
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>
