@@ -5,31 +5,30 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:Calculator"
     mc:Ignorable="d"
-    Title="Calculator" Height="800" Width="800" Background="#FF1F1F1F" BorderBrush="#FF151515">
+        
+        
+    Title="Calculator" Height="800" Width="800" Background="#FFE6E6E6" BorderBrush="#FF151515" Visibility="Visible" BorderThickness="0">
+
     <Window.Resources>
-        <Style x:Key="Knopka">
-            <Setter Property="Button.FontFamily" Value="Verdana" />
-            <Setter Property="Button.Background" Value="#FF060606" />
-            <Setter Property="Button.Foreground" Value="White" />
-            <Setter Property="Button.FontSize" Value="30" />
-            <Setter Property="Button.Margin" Value="2" />
-            <Setter Property="Button.BorderThickness" Value="0" />
-            <Style.Triggers>
-            </Style.Triggers>
+
+        <Style x:Key="Knopka" TargetType="Button">
+            <Setter Property="FontFamily" Value="Bahnschrift Light" />
+            <Setter Property="Background" Value="#FFFAFAFA" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="BorderThickness" Value="0" />
+           
         </Style>
         <Style x:Key="SidePanel">
             <Setter Property="Button.Focusable" Value="False"/>
             <Setter Property="Button.HorizontalAlignment" Value="Left" />
+            <Setter Property="Button.Background" Value="#FFFAFAFA" />
+            <Setter Property="Button.BorderBrush" Value="#FFFAFAFA" />
             <Setter Property="WrapPanel.HorizontalAlignment" Value="Left"/>
             <Setter Property="WrapPanel.Orientation" Value="Vertical"/>
+            <Setter Property="WrapPanel.Margin" Value="1"/>
             <Setter Property="TextBlock.Width" Value="{Binding ActualWidth, ElementName=HistoryList, Mode=OneWay}"/>
-        </Style>
-        <Style BasedOn="{StaticResource SidePanel}" x:Key="SidePanelButtons" TargetType="Button">
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FF1F1F1F"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>
@@ -38,7 +37,7 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width ="118*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="LayoutRoot" Background="#FF1F1F1F">
+        <Grid x:Name="LayoutRoot" Background="#FFE6E6E6">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -52,8 +51,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="textBox" Grid.Column="0" Grid.ColumnSpan="4" TextAlignment="Left" TextChanged="onTextChanged" KeyDown="onEnter" Foreground="White"  FontSize="48" TextWrapping="Wrap" IsUndoEnabled="True" Background="#FF1F1F1F" SelectionBrush="White" BorderBrush="#FF1F1F1F"/>
-            <Button Grid.Column="0" Grid.Row="1" Click="symbolClick" Focusable="False" Style="{StaticResource Knopka}">1</Button>
+            <TextBox x:Name="textBox" Grid.Column="0" Grid.ColumnSpan="4" TextAlignment="Left" TextChanged="onTextChanged" KeyDown="onEnter" Foreground="Black"  FontSize="48" TextWrapping="Wrap" IsUndoEnabled="True" Background="#FFE6E6E6" SelectionBrush="White" BorderBrush="#FFE6E6E6"/>
+            <Button Grid.Column="0" Grid.Row="1" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">1</Button>
             <Button Grid.Column="1" Grid.Row="1" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">2</Button>
             <Button Grid.Column="2" Grid.Row="1" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">3</Button>
             <Button Grid.Column="0" Grid.Row="2" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">4</Button>
@@ -67,28 +66,16 @@
             <Button Grid.Column="4" Grid.Row="2" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">-</Button>
             <Button Grid.Column="4" Grid.Row="3" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">*</Button>
             <Button Grid.Column="4" Grid.Row="4" Click="symbolClick" Focusable="False"  Style="{StaticResource Knopka}">/</Button>
-            <Button Grid.Column="2" Grid.Row="4" Click="onEqual" Focusable="False" Style="{StaticResource Knopka}">Enter</Button>
+            <Button Grid.Column="2" Grid.Row="4" Click="onEqual" Focusable="False" Style="{StaticResource Knopka}" Background="#FF7FACCF">Enter</Button>
             <Button Grid.Column="0" Grid.Row="5" Click="deleteLast" Focusable="False" Style="{StaticResource Knopka}">←</Button>
         </Grid>
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="4" ShowsPreview="True" Background="#FF393E46"/>
-        <TabControl Grid.Column="2" HorizontalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" SelectedIndex="3" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF1F1F1F">
-            <TabItem Header="History" IsSelected="True" Margin="-2,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="#FFEC2A2A" Background="#FFFF2424">
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="4" ShowsPreview="True" Background="White" Foreground="{x:Null}"/>
+        <TabControl Grid.Column="2" HorizontalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" SelectedIndex="3" VerticalContentAlignment="Center" BorderThickness="0" Background="#FFE6E6E6" BorderBrush="#FFE6E6E6">
+            <TabItem Header="History" IsSelected="False" Margin="-2,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="#FFD6D6D6" Background="#FFD6D6D6" FontFamily="Bahnschrift Light">
                 <StackPanel Name="HistoryList">
-                    <!--<Button x:Name="button" >
-                        <WrapPanel Orientation="Vertical" Width="250" HorizontalAlignment="Left">
-                            <TextBlock Width="{Binding ActualWidth, ElementName=HistoryList, Mode=OneWay}" HorizontalAlignment="Left" FontSize="20">55+6</TextBlock>
-                            <TextBlock Text="answer: " Foreground="White" FontSize="22"></TextBlock>
-                        </WrapPanel>
-                    </Button>-->
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Memory" IsSelected="False" HorizontalAlignment="Left" Margin="0,-2,0,0">
-                <TabItem.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                        <GradientStop Color="#FF8259CB" Offset="1"/>
-                    </LinearGradientBrush>
-                </TabItem.Background>
+            <TabItem Header="Memory" IsSelected="False"  Margin="0,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#FFD6D6D6" BorderBrush="#FFD6D6D6" FontFamily="Bahnschrift Light" >
                 <StackPanel Name="MemoryList">
                 </StackPanel>
             </TabItem>
