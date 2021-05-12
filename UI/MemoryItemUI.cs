@@ -12,7 +12,7 @@ namespace Calculator.UI
             Click += handler;
             this.name = name;
             this.value = value;
-            //Style = 
+            Style = style;
             Content = new WrapPanel() { Style = style };
             ((WrapPanel)Content).Children.Add(new TextBlock { Text = name, Style = style });
             ((WrapPanel)Content).Children.Add(new TextBlock { Text = value, Style = style });
