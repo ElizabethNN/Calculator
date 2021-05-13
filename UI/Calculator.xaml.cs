@@ -94,11 +94,13 @@ namespace Calculator
         {
             var element = (MemoryItemUI)sender;
             textBox.Text += "$" + element.name + "$";
+            textBox.CaretIndex = textBox.Text.Length;
         }
         private void onHistoryClick(object sender, EventArgs e)
         {
             var element = (HistoryItemUI)sender;
             textBox.Text = element.expression;
+            textBox.CaretIndex = textBox.Text.Length;
         }
         private void onTabClick(object sender, RoutedEventArgs e)
         {
