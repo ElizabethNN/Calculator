@@ -71,11 +71,11 @@
         </Grid>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="4" ShowsPreview="True" Background="White" Foreground="{x:Null}"/>
         <TabControl Grid.Column="2" HorizontalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" SelectedIndex="3" VerticalContentAlignment="Center" BorderThickness="0" Background="#FFE6E6E6" BorderBrush="#FFE6E6E6">
-            <TabItem Header="History" IsSelected="False" Margin="-2,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="#FFD6D6D6" Background="#FFD6D6D6" FontFamily="Bahnschrift Light">
+            <TabItem Header="History" IsSelected="False" Margin="-2,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="#FFD6D6D6" Background="#FFD6D6D6" FontFamily="Bahnschrift Light" GotFocus="onTabClick">
                 <StackPanel Name="HistoryList">
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Memory" IsSelected="False"  Margin="0,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#FFD6D6D6" BorderBrush="#FFD6D6D6" FontFamily="Bahnschrift Light" >
+            <TabItem Header="Memory" IsSelected="False"  Margin="0,-2,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#FFD6D6D6" BorderBrush="#FFD6D6D6" FontFamily="Bahnschrift Light" GotFocus="onTabClick">
                 <StackPanel Name="MemoryList">
                 </StackPanel>
             </TabItem>

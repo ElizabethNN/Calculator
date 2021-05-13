@@ -1,2 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Calculator.UI.Unifier">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAgEAAQAAAABAKAAEAAAgAAgAAAAAAQAAAAA=</HashCode>
+      <FileName>UI\Unifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.Computator.BasicComputator" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgEAAAEACAAAAAAAAAIAAAAAAAAAAAAEAAAgABEAQ=</HashCode>
+      <FileName>Computator\Computator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Calculator.Computator.IComputator" Collapsed="true">
+    <Position X="10.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Computator\IComputator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -75,15 +75,20 @@ namespace Calculator.UI
             }
             return Elements;
         }
-        public static string cleanInput(string input)
+        public static string cleanInput(string input, int old_pos, out int new_pos)
         {
             string str = "";
+            new_pos = old_pos;
             string lowercase = input.ToLower();
             for (int i = 0; i < lowercase.Length; i++)
             {
                 if (_allowedsymbols.Contains(lowercase[i]))
                 {
                     str += input[i];
+                }
+                else if (i < old_pos)
+                {
+                    new_pos--;
                 }
             }
             return str;

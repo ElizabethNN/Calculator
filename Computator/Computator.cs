@@ -4,16 +4,16 @@ using System.Linq;
 namespace Calculator.Computator
 {
     
-    class Computator : IComputator
+    class BasicComputator : IComputator
     {
-        static Computator _self;
+        static BasicComputator _self;
         static public readonly string[] prefix_functions = { "neg", "sin", "cos", "tg", "ctg", "sqrt", "log", "lg", "ln", "abs", "asin", "acos", "atg", "actg" };
         static public readonly string[] postfix_functions = { "!" };
         static public readonly string[] high_priority_functions = { "^" };
         static public readonly string[] medium_priority_functions = { "*", "/" };
         static public readonly string[] low_priority_functions = { "+", "-" };
 
-        private Computator() { }
+        private BasicComputator() { }
 
         string computate(string[] postfix_expression)
         {
@@ -55,24 +55,29 @@ namespace Calculator.Computator
             return numbers.Pop();
         }
 
-        public static Computator getComputator()
+        public static BasicComputator getComputator()
         {
             if (_self == null)
             {
-                _self = new Computator();
+                _self = new BasicComputator();
             }
             return _self;
         }
 
-        string[] convertToPostfixExpression(string[] infix_expression)
+        string[] convertToPostfixExpression(string[] inf_expression)
         {
+            var infix_expression = inf_expression.ToList();
             var stack = new Stack<string>();
             var result = new List<string>();
-            for (int i = 0; i < infix_expression.Length; i++)
+            for (int i = infix_expression.Count - 1; i >=0; i--)
             {
                 if (infix_expression[i] == "-" && (i == 0 || !double.TryParse(infix_expression[i - 1], out _)))
                 {
                     infix_expression[i] = "neg";
+                }
+                if (infix_expression[i] == "+" && (i == 0 || !double.TryParse(infix_expression[i - 1], out _)))
+                {
+                    infix_expression.RemoveAt(i);
                 }
             }
             foreach (string i in infix_expression)
@@ -126,7 +131,7 @@ namespace Calculator.Computator
                 }
                 else
                 {
-                    throw new System.Exception("Unrecognized symbol " + i + " at position " + infix_expression.ToList().IndexOf(i));
+                    throw new System.Exception("Unrecognized symbol");
                 }
             }
             while (stack.Count > 0)

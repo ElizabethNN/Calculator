@@ -21,11 +21,11 @@ namespace Calculator
             textBox.Focus();
             Unifier.loadAll();
             MemoryList.Children.Clear();
-            foreach (object i in Presentator.updateMemory(OnMemoryClick, FindResource("SidePanel") as Style))
+            foreach (object i in Presentator.updateMemory(onMemoryClick, FindResource("SidePanel") as Style))
             {
                 MemoryList.Children.Add((UIElement)i);
             }
-            foreach (object i in Presentator.updateHistory(OnHistoryClick, FindResource("SidePanel") as Style))
+            foreach (object i in Presentator.updateHistory(onHistoryClick, FindResource("SidePanel") as Style))
             {
                 HistoryList.Children.Add((UIElement)i);
             }
@@ -34,8 +34,8 @@ namespace Calculator
         private void onTextChanged(object sender, TextChangedEventArgs e)
         {
             var textbox = (TextBox)sender;
-            textbox.Text = Presentator.cleanInput(textbox.Text);
-            textbox.CaretIndex = textbox.Text.Length;
+            textbox.Text = Presentator.cleanInput(textbox.Text, textBox.CaretIndex, out int index);
+            textbox.CaretIndex = index;
         }
         private void onEnter(object sender, KeyEventArgs e)
         {
@@ -66,12 +66,12 @@ namespace Calculator
                 result = Unifier.calculate(assignment[1], assignment[0]);
             }
             MemoryList.Children.Clear();
-            foreach (object i in Presentator.updateMemory(OnMemoryClick, FindResource("SidePanel") as Style))
+            foreach (object i in Presentator.updateMemory(onMemoryClick, FindResource("SidePanel") as Style))
             {
                 MemoryList.Children.Add((UIElement)i);
             }
             HistoryList.Children.Clear();
-            foreach (object i in Presentator.updateHistory(OnHistoryClick, FindResource("SidePanel") as Style))
+            foreach (object i in Presentator.updateHistory(onHistoryClick, FindResource("SidePanel") as Style))
             {
                 HistoryList.Children.Add((UIElement)i);
             }
@@ -90,15 +90,19 @@ namespace Calculator
         {
             Unifier.saveAll();
         }
-        private void OnMemoryClick(object sender, EventArgs e)
+        private void onMemoryClick(object sender, EventArgs e)
         {
             var element = (MemoryItemUI)sender;
             textBox.Text += "$" + element.name + "$";
         }
-        private void OnHistoryClick(object sender, EventArgs e)
+        private void onHistoryClick(object sender, EventArgs e)
         {
             var element = (HistoryItemUI)sender;
             textBox.Text = element.expression;
+        }
+        private void onTabClick(object sender, RoutedEventArgs e)
+        {
+            textBox.Focus();
         }
     }
 }

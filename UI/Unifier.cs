@@ -1,14 +1,14 @@
 ﻿using Calculator.Data;
-using System;
+using Calculator.Computator;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Calculator.Computator
+namespace Calculator.UI
 {
     class Unifier
     {
-        private static Computator _computator = Computator.getComputator();
+        private static IComputator _computator = BasicComputator.getComputator();
         private static IData _memory = new Memory();
         private static IData _history = new History();
         public static Dictionary<string, string> history_dump {
@@ -84,13 +84,16 @@ namespace Calculator.Computator
                 {
                     _history[expression] = "wrongParameters";
                 }
-                catch
+                catch(System.Exception e)
                 {
-                    _history[expression] = "unknownError";
+                    _history[expression] = e.Message;
                 }
                 history_dump = _history.getDataDump();
             }
-            _memory["answer"] = _history[expression];
+            if (double.TryParse(_history[expression], out _))
+            {
+                _memory["answer"] = _history[expression];
+            }
             return _history[expression];
         }
         public static string calculate(string expression, string name)
@@ -119,15 +122,15 @@ namespace Calculator.Computator
                 {
                     _history[expression] = "wrongParameters";
                 }
-                catch
+                catch (System.Exception e)
                 {
-                    _history[expression] = "unknownError";
+                    _history[expression] = e.Message;
                 }
                 history_dump = _history.getDataDump();
             }
-            _memory["answer"] = _history[expression];
             if (double.TryParse(_history[expression], out _))
             {
+                _memory["answer"] = _history[expression];
                 _memory[name] = _history[expression];
             }
             return _history[expression];
