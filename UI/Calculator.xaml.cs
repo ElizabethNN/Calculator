@@ -37,7 +37,7 @@ namespace Calculator
             textbox.Text = Presentator.cleanInput(textbox.Text, textBox.CaretIndex, out int index);
             textbox.CaretIndex = index;
         }
-        private void onEnter(object sender, KeyEventArgs e)
+        private void onKeyboardKeys(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {

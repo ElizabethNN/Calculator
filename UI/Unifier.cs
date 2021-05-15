@@ -131,7 +131,7 @@ namespace Calculator.UI
             if (double.TryParse(_history[expression], out _))
             {
                 _memory["answer"] = _history[expression];
-                _memory[name] = _history[expression];
+                _memory[name.Trim('$')] = _history[expression];
             }
             return _history[expression];
         }
